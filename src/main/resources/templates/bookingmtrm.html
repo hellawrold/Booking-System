@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Booking</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" />
+</head>
+<style>
+	.conf_bok {
+		margin: 50px 50px 40px 50px;
+	}
+
+	.flex_mgl {
+		margin-left: 20px;
+		background-color: #0d6efd;
+		color: #fff6fe;
+	}
+
+	.mgl {
+		border-radius: 25px;
+		width: 10em;
+	}
+
+	.err_p {
+		width: 400px;
+		margin-top: 25px
+	}
+
+	.marg_l {
+		margin-left: 60px
+	}
+</style>
+
+<body>
+	<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+		<div class="container-fluid">
+			<a href="/" class="navbar-brand">Booking System</a>
+			<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarResponsive">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a href="/bookappls" class="nav-link">My Book Applications</a>
+					</li>
+					<li class="nav-item active">
+						<a href="/logout" class="nav-link">Logout</a>
+					</li>
+
+				</ul>
+
+			</div>
+		</div>
+	</nav>
+	<div class="container conf_bok ">
+		<div align="center">
+			<h2>Booking<i class="fa fa-calendar-check fa-xs"></i></h2>
+		</div>
+
+	</div>
+
+	<div class="container conf_bok">
+		<div align="center">
+			<h4>You are booking at <p th:text="${mtRm.mtrm_name}"></p>
+			</h4>
+		</div>
+	</div>
+
+	<form th:action="@{meetingroom/{id}(id=${mtRm.mtrm_id})}" th:object="${Bkappl}" method="post">
+		<div class="container">
+			<div class="d-flex justify-content-between">
+				<span class="input-group-text flex_mgl" id="basic-addon1">User</span>
+				<input type="text" class="form-control" disabled th:field="${user.UserName}">
+				<span class="input-group-text flex_mgl" id="basic-addon1">Start Time</span>
+				<div class="input-group">
+					<button type="button" id="toggle1" class="input-group-text"><i
+							class="fa fa-calendar-alt light_blue"></i></button>
+					<input type="text" id="pickerStart" class="form-control" th:field="*{start_time}">
+
+				</div>
+				<span class="input-group-text flex_mgl" id="basic-addon1">End Time</span>
+				<div class="input-group">
+					<button type="button" id="toggle2" class="input-group-text"><i
+							class="fa fa-calendar-alt light_blue"></i></button>
+					<input type="text" id="pickerEnd" class="form-control" th:field="*{end_time}">
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="container conf_bok ">
+			<div class="d-flex justify-content-center marg_l">
+				<p class="alert alert-danger" th:if="${error}" th:text="${error}"></p>
+			</div>
+			<div align="center">
+				<button type="submit" class="btn btn-primary mgl">Book Now</button>
+			</div>
+
+		</div>
+	</form>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha512-5WvZa4N7Jq3TVNCp4rjcBMlc6pT3lZ7gVxjtI6IkKW+uItSa+rFgtFljvZnCxQGj8SUX5DHraKE6Mn/4smK1Cg==" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.js" integrity="sha512-+UiyfI4KyV1uypmEqz9cOIJNwye+u+S58/hSwKEAeUMViTTqM9/L4lqu8UxJzhmzGpms8PzFJDzEqXL9niHyjA==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
+
+	<script>
+		jQuery.datetimepicker.setDateFormatter('moment')
+		$('#pickerStart').datetimepicker({
+			timepicker: true,
+			datepicker: true,
+			format: 'YYYY-MM-DD h:mm a',
+			value: '2021-4-26 08:00',
+			step: 30,
+			hours12: false,
+			weeks: true,
+			yearStart: 2010,
+			yearEnd: 2030,
+			onShow: function (ct) {
+				this.setOptions({
+					maxDate: $('#pickerEnd').val() ? $('#pickerEnd').val() : false
+				})
+			}
+		})
+		$('#toggle1').on('click', function () {
+			$('#pickerStart').datetimepicker('toggle')
+		})
+		$('#pickerEnd').datetimepicker({
+			timepicker: true,
+			datepicker: true,
+			format: 'YYYY-MM-DD h:mm a',
+			value: '2021-4-26 09:00',
+			step: 30,
+			hours12: false,
+			weeks: true,
+			yearStart: 2010,
+			yearEnd: 2030,
+			onShow: function (ct) {
+				this.setOptions({
+					minDate: $('#pickerStart').val() ? $('#pickerStart').val() : false
+				})
+			}
+		})
+
+		$('#toggle2').on('click', function () {
+			$('#pickerEnd').datetimepicker('toggle')
+		})
+	</script>
+</body>
+
+</html>
